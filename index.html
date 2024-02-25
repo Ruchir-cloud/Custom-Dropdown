@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+    <title>Multiple Dropdown</title>
+    <link rel="import" href="../costing-tool-pds/Dashboard Graphs/navigation/sidebar-index.php">
+    <link rel="stylesheet" href="../costing-tool-pds/Dashboard Graphs/navigation/sidebar-styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .dropdown-list::-webkit-scrollbar {
+            width: 5px;
+            height: 8px;
+            background-color: white;
+        }
+
+        .dropdown-list::-webkit-scrollbar-thumb {
+            background-color: gray;
+        }
+
+        .container {
+            position: relative;
+        }
+
+        .input-details {
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 84vw;
+        }
+
+        .form-data {
+            position: absolute;
+            top: 95px;
+            left: 100px;
+            box-shadow: 0 0 3px rgba(0, 0, 0, 0.9);
+            /* margin: 20px 80px; */
+            display: flex;
+            width: 85%;
+            padding: 0px 5px;
+        }
+
+        .input-dates {
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+        }
+
+        .user-dates {
+            width: 250px;
+            padding: 12px;
+            margin: 12px 4px;
+        }
+
+        .user-dates .label {
+            padding-bottom: 4px;
+            font-weight: lighter;
+            font-size: 0.8rem;
+        }
+
+        .user-dates input {
+            width: 230px;
+            padding: 5px;
+            outline: none;
+        }
+
+        .user-input {
+            margin: 2px;
+            padding: 12px 8px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.6s ease;
+        }
+
+        .user-input .label {
+            padding: 0px 0px 4px 2px;
+            font-weight: 100;
+            font-size: 0.8rem;
+        }
+
+        .user-input .dropdown-label {
+            border: 1px solid black;
+            border-radius: 10px;
+            position: relative;
+            padding: 10px 6px;
+            display: flex;
+            align-items: center;
+            width: 245px;
+            background: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .dropdown-label span {
+            font-size: 0.9rem;
+        }
+
+        .label-input {
+            position: relative;
+        }
+
+        .user-input .icon-container {
+            position: absolute;
+            top: 40px;
+            right: 20px;
+            font-size: 1.25rem;
+            display: block;
+        }
+
+        .icon-container span {
+            color: rgb(137, 137, 137);
+            font-size: 1.2rem;
+            transition: all 0.5s ease;
+        }
+
+        .dropdown-list {
+            box-shadow: 0 0 3px rgba(0, 0, 0, 0.6);
+            margin: 4px 4px;
+            display: flex;
+            flex-direction: column;
+            display: none;
+            width: 225px;
+            z-index: 1;
+            cursor: pointer;
+            overflow-y: scroll;
+            /* scrollbar-width: thin; */
+            /* overflow-x: none; */
+            height: 175px;
+            padding: 6px 3px;
+            border-radius: 4px;
+            background: #fff;
+            position: fixed;
+            z-index: 1;
+            border: 0.5px solid gray;
+        }
+
+        .dropdown-item {
+            list-style: none;
+            margin: 0px 0px;
+            padding: 8px;
+            width: 200px;
+        }
+
+        .dropdown-item:hover {
+            background: #dddddd;
+            width: 100%;
+        }
+
+        .dropdown-item .option-text {
+            font-weight: 100;
+            font-size: 0.9rem;
+        }
+
+        .user-input.active .dropdown-list {
+            display: block;
+        }
+
+        .user-input.active span.arrow {
+            transform: rotate(-180deg);
+            display: block;
+        }
+
+        .btn {
+            padding: 5px 10px;
+            position: absolute;
+            bottom: 25px;
+            right: 210px;
+        }
+
+        .btn button {
+            padding: 8px 12px;
+            outline: none;
+            cursor: pointer;
+            background-color: #3ac47d;
+            color: #fff;
+            font-weight: 600;
+            border: none;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <form action="#" method="post" id="myForm">
+            <div class="form-data">
+                <div class="input-details">
+                    <div class="user-input">
+                        <h4 class="label">Fruits</h4>
+                        <div class="input-label">
+                            <div class="dropdown-label">
+                                <span>---Select Fruits---</span>
+                            </div>
+                            <div class="icon-container">
+                                <span class="material-icons-sharp arrow">
+                                    expand_more
+                                </span>
+                            </div>
+                        </div>
+                        <ul class="dropdown-list" onchange="selectedValue()">
+                            <li class="dropdown-item">
+                                <div class="option-text">---Select Fruits---</div>
+                            </li>
+                            <li class="dropdown-item">
+                                <div class="option-text">Apple</div>
+                            </li>
+                            <li class="dropdown-item">
+                                <div class="option-text">Banana</div>
+                            </li>
+                            <li class="dropdown-item">
+                                <div class="option-text">Chickoo</div>
+                            </li>
+                            <li class="dropdown-item">
+                                <div class="option-text">Dragon Fruit</div>
+                            </li>
+                            <li class="dropdown-item">
+                                <div class="option-text">Grapes</div>
+                            </li>
+                            <li class="dropdown-item">
+                                <div class="option-text">Mango</div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="user-input">
+                        <h4 class="label">Vegetables</h4>
+                        <div class="input-label">
+                            <div class="dropdown-label">
+                                <span>---Select Vegetables---</span>
+                            </div>
+                            <div class="icon-container">
+                                <span class="material-icons-sharp arrow">
+                                    expand_more
+                                </span>
+                            </div>
+                        </div>
+                        <ul class="dropdown-list" onchange="selectedValue()">
+                            <li class="dropdown-item">
+                                <div class="option-text">---Select Vegetables---</div>
+                            </li>
+                            <li class="dropdown-item">
+                                <div class="option-text">Potato</div>
+                            </li>
+                            <li class="dropdown-item">
+                                <div class="option-text">Tomato</div>
+                            </li>
+                            <li class="dropdown-item">
+                                <div class="option-text">Pumpkin</div>
+                            </li>
+                            <li class="dropdown-item">
+                                <div class="option-text">Lady Finger</div>
+                            </li>
+                            <li class="dropdown-item">
+                                <div class="option-text">Cabbage</div>
+                            </li>
+                            <li class="dropdown-item">
+                                <div class="option-text">Cauliflower</div>
+                            </li>
+                            <li class="dropdown-item">
+                                <div class="option-text">Coriander</div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="user-input">
+                        <h4 class="label">Model</h4>
+                        <div class="input-label">
+                            <div class="dropdown-label">
+                                <span>---Select Model---</span>
+                            </div>
+                            <div class="icon-container">
+                                <span class="material-icons-sharp arrow">
+                                    expand_more
+                                </span>
+                            </div>
+                        </div>
+                        <ul class="dropdown-list" onchange="selectedValue()">
+                            <li class="dropdown-item">
+                                <div class="option-text">---Select Model---</div>
+                            </li>
+                            <li class="dropdown-item">
+                                <div class="option-text">Style</div>
+                            </li>
+                            <li class="dropdown-item">
+                                <div class="option-text">Sportline</div>
+                            </li>
+                            <li class="dropdown-item">
+                                <div class="option-text">L & K</div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="user-input">
+                        <h4 class="label">Color Supplier</h4>
+                        <div class="input-label">
+                            <div class="dropdown-label">
+                                <span>---Select Color---</span>
+                            </div>
+                            <div class="icon-container">
+                                <span class="material-icons-sharp arrow">
+                                    expand_more
+                                </span>
+                            </div>
+                        </div>
+                        <ul class="dropdown-list" onchange="selectedValue()">
+                            <li class="dropdown-item">
+                                <div class="option-text">---Select Color---</div>
+                            </li>
+                            <li class="dropdown-item">
+                                <div class="option-text">White</div>
+                            </li>
+                            <li class="dropdown-item">
+                                <div class="option-text">Black</div>
+                            </li>
+                            <li class="dropdown-item">
+                                <div class="option-text">Grey</div>
+                            </li>
+                            <li class="dropdown-item">
+                                <div class="option-text">Silver</div>
+                            </li>
+                            <li class="dropdown-item">
+                                <div class="option-text">Golden</div>
+                            </li>
+                            <li class="dropdown-item">
+                                <div class="option-text">Red</div>
+                            </li>
+                            <li class="dropdown-item">
+                                <div class="option-text">Blue</div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="user-input">
+                        <h4 class="label">Car</h4>
+                        <div class="input-label">
+                            <div class="dropdown-label">
+                                <span>---Select Car---</span>
+                            </div>
+                            <div class="icon-container">
+                                <span class="material-icons-sharp arrow">
+                                    expand_more
+                                </span>
+                            </div>
+                        </div>
+                        <ul class="dropdown-list" onchange="selectedValue()">
+                            <li class="dropdown-item">
+                                <div class="option-text">---Select Car</div>
+                            </li>
+                            <li class="dropdown-item">
+                                <div class="option-text">Tata Harrier</div>
+                            </li>
+                            <li class="dropdown-item">
+                                <div class="option-text">Skoda Kodiaq</div>
+                            </li>
+                            <li class="dropdown-item">
+                                <div class="option-text">Skoda Octavia</div>
+                            </li>
+                            <li class="dropdown-item">
+                                <div class="option-text">Skoda Slavia</div>
+                            </li>
+                            <li class="dropdown-item">
+                                <div class="option-text">Volvo S60</div>
+                            </li>
+                            <li class="dropdown-item">
+                                <div class="option-text">Volvo S90</div>
+                            </li>
+                            <li class="dropdown-item">
+                                <div class="option-text">Mercedes Maybach</div>
+                            </li>
+                            <li class="dropdown-item">
+                                <div class="option-text">BMW 6</div>
+                            </li>
+                            <li class="dropdown-item">
+                                <div class="option-text">Range Rover Vogue</div>
+                            </li>
+                            <li class="dropdown-item">
+                                <div class="option-text">Jaguar XF</div>
+                            </li>
+                            <li class="dropdown-item">
+                                <div class="option-text">Rolls Royce</div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="btn">
+                        <button>Search</button>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+    <script>
+        const arrows = document.querySelectorAll(".arrow"),
+            dropdownLabel = document.querySelectorAll(".dropdown-label"),
+            dropdownList = document.querySelector(".dropdown-list"),
+            dropdownItem = document.querySelectorAll(".dropdown-item");
+
+        for (var i = 0; i < arrows.length; i++) {
+            arrows[i].addEventListener("click", (e) => {
+                let arrowParent = e.target.parentElement.parentElement.parentElement;
+                arrowParent.classList.toggle("active");
+            })
+        }
+
+        dropdownItem.forEach(option =>{
+            option.addEventListener("click", ()=>{
+                for(var j = 0; j < dropdownLabel.length; j++){
+                    let selectedOption = option.querySelector(".option-text").innerText;
+                    dropdownLabel.innerText = selectedOption;
+                    console.log(selectedOption);
+                }
+            })
+        })
+
+
+        // const arrow = document.querySelectorAll(".arrow"),
+        //       dropdownList = document.querySelectorAll(".dropdown-list"),
+        //       dropdownItem = document.querySelectorAll(".dropdown-item"),
+        //       dropdownLabel = document.querySelectorAll(".dropdown-label");
+        // for(var i = 0; i < arrow.length; i++){
+        //     arrow[i].addEventListener("click", (e)=> {
+        //         let arrowParent=e.target.parentElement.parentElement;
+        //         arrowParent.classList.toggle("showMenu");
+        //     })
+        // }
+    </script>
+</body>
+
+</html>
